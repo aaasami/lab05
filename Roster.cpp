@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <fstream>
 #include <cassert>
-const int ROSTER_MAX = 300;
-
 
 Roster::Roster() {
   // initialize to empty array
@@ -95,7 +93,7 @@ std::string Roster::toString() const {
 }
 
 void Roster::sortByPerm() {
-  for(int k = this->numStudents; k > 0; k--)
+  for(int k = this->numStudents; k > 1; k--)
   sortByPermHelper(k-1);
 }
 
