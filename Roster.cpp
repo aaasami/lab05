@@ -93,8 +93,10 @@ std::string Roster::toString() const {
 }
 
 void Roster::sortByPerm() {
-  for(int k = this->numStudents; k > 1; k--)
-  sortByPermHelper(k-1);
+  //encounter a mistake---cannot use k > 0!!!!!!!
+  for(int k = this->numStudents; k > 1; k--){
+    sortByPermHelper(k-1);
+  }
 }
 
 int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
