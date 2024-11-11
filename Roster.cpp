@@ -110,8 +110,6 @@ int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
 
 void Roster::sortByPermHelper(int k) {
   // swaps max perm from [0..k-1] with elem [k-1]
-
-
   int im = indexOfMaxPermAmongFirstKStudents(k);
 
   // now swap the pointers between index im and index k-1
