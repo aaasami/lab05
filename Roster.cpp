@@ -1,28 +1,28 @@
+//name: Shuang Li
+//Perm: A2K6Y57
 #include "Roster.h"
-
 #include <cstdlib>
 #include <fstream>
 #include <cassert>
+const int ROSTER_MAX = 300;
+
 
 Roster::Roster() {
   // initialize to empty array
-
   this->numStudents = 0;
   for (int i=0; i<ROSTER_MAX; i++) {
     this->students[i] = NULL;
   }
-
 }
 
 void Roster::resetRoster() {
  // To avoid memory leaks:
-  //  Recycle memory for all allocated students on roster
-  
+//  Recycle memory for all allocated students on roster
   while (this->numStudents > 0) {
     delete this->students[this->numStudents - 1];
+    this->students[this->numStudents - 1] = NULL;
     this->numStudents --;
   }
-
 }
 
 void Roster::addStudentsFromFile(std::string filename) {
@@ -71,17 +71,23 @@ void Roster::addStudentsFromStream(std::istream &is) {
 }
 
 int Roster::getNumStudents() const { 
-  return -999; // stub
+  return  this->numStudents;
 }
 
 Student Roster::getStudentAt(int index) const { 
-  return Student(-999,"Stubbi","Stubsdottir"); 
+  return *this->students[index]; 
 }
 
 std::string Roster::toString() const {
   std::string result = "{\n";
   
-  result += "STUB!!!!";   // @@@ RESTORE THIS 
+  for (int i = 0; i < this->numStudents; i++) {
+    result += this->students[i]->toString();
+    if(i != this->numStudents - 1){
+      result += ",";
+    }
+    result += "\n";
+  }
 
   result += "}\n";
   return result;
@@ -89,12 +95,17 @@ std::string Roster::toString() const {
 }
 
 void Roster::sortByPerm() {
-  // SELECTION SORT
-  // stub does nothing
+  for(int k = this->numStudents; k > 0; k--)
+  sortByPermHelper(k-1);
 }
 
 int Roster::indexOfMaxPermAmongFirstKStudents(int k) const {
-  return 0; // STUB
+  int temp = 0;
+  for(int i = 1; i < k; i++){
+    if(this->students[temp]->getPerm() < this->students[i]->getPerm())
+      temp = i;
+  }
+  return temp;
 }
 
 void Roster::sortByPermHelper(int k) {
@@ -104,7 +115,6 @@ void Roster::sortByPermHelper(int k) {
   int im = indexOfMaxPermAmongFirstKStudents(k);
 
   // now swap the pointers between index im and index k-1
-
-  // THIS IS STILL A STUB !!!
+  std::swap(this->students[im],this->students[k-1]);
   
 }
